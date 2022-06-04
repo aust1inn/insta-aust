@@ -9,7 +9,7 @@
         <div class="media-body">
           <h2 class="account-heading">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.profile.bio }}</p>
-  
+          <a href="{% url 'update_profile' %}" ">update profile</a>
         </div>
       </div>
       <!-- FORM HERE -->
