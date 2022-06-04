@@ -1,0 +1,50 @@
+<nav id="nav" class="navbar sticky-top navbar-expand-lg navbar-light" style="font-family: monospace">
+    <div class="container">
+      <div class="col-md-4">
+        <a  id="icons" class=" navbar-brand" href="{% url 'login' %}"><i class="fab fa-instagram"></i> <i style="border-left:1px solid rgba(0,0,0,0.4);"> </i> <i class="space"></i>  Instagram </a>
+      
+      </div>
+      <div class="col-md-4">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <form  action="" role="search" class="form-inline  my-2 my-lg-0">
+            <input id="searchUp" class="form-control mr-sm-2" name="user" type="search" placeholder="Search" aria-label="Search">
+          </form>
+  
+        </div>
+  
+      </div>
+      <div class="col-md-4">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            {% if user.is_authenticated %}
+
+            <h5>Welcome, {{user.username}}</h5>
+    
+          <!-- <a class="uploads" ><i class="far fa-compass" style="font-size: xx-large;margin-left: 10px;"></i></a>
+          <a class="likes" ><i class="far fa-thumbs-up"style="font-size: xx-large;margin-left: 10px;"></i></a>
+         -->
+
+     
+
+          <a class="profile" href="{% url 'profile' %}"><i class="fas fa-id-badge" style="font-size: xx-large;margin-left: 10px;">profile</i></a>
+
+        <h5> <a href="{% url 'logout' %}" style="margin-left: 10px;font: xx-large;">Logout</a></h5>
+
+          {% else %}
+        <h5> <a href="{% url 'login' %}" style="margin-left: 10px;">Login</a></h5>
+      <h5><a href="{% url 'register' %}" style="margin-left: 10px;">Register</a></h5>
+
+          {% endif %}
+
+          <br>
+  
+        </div>
+  
+  
+      </div>
+  
+    </div>
+  
+
+  
+  </nav>
