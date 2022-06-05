@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
+from django.core.exceptions import ObjectDoesNotExist
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,UploadImageForm
 from django.contrib.auth.decorators import login_required
+from .models import Image,Profile
 
 
 def register(request):
@@ -18,7 +20,21 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')    
+    current_user = request.user
+    images =  Image.objects.filter(profile = current_user.profile)
+    try:
+        profile = Profile.objects.get(user = current_user)
+        
+    except: 
+        ObjectDoesNotExist
+    
+    context = {
+        
+        'profile':profile,
+        'images':images,
+        'current_user':current_user
+    }
+    return render(request, 'users/profile.html',context)    
 
 def update_profile(request):
     if request.method == 'POST':
@@ -59,3 +75,14 @@ def upload_image(request):
             "form":form
             }
     return render(request, 'users/upload_image.html', context)    
+
+def like(request,operation,pk):
+    image = get_object_or_404(Image,pk=pk)
+    
+    if operation == 'like':
+        image.likes += 1
+        image.save()
+    elif operation =='unlike':
+        image.likes -= 1
+        image.save()
+    return redirect('index')

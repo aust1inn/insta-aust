@@ -27,7 +27,7 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('update_profile/', user_views.update_profile, name='update_profile'),
     path('upload_image/', user_views.upload_image, name='upload_image'),
-
+    path('add_comment/', user_views.add_comment, name='add_comment'),
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
