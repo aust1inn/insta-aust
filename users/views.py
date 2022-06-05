@@ -86,7 +86,7 @@ def add_comment(request,pk):
             comment.image = image
             comment.poster = current_user
             comment.save()
-            return redirect('home')
+            return redirect('index')
     else:
         form = CommentForm()
         return render(request,'comment.html',{"user":current_user,"comment_form":form})    
