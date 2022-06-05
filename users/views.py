@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,UploadImageForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,UploadImageForm,CommentForm
 from django.contrib.auth.decorators import login_required
 from .models import Image,Profile
 
@@ -75,6 +75,21 @@ def upload_image(request):
             "form":form
             }
     return render(request, 'users/upload_image.html', context)    
+
+def add_comment(request,pk):
+    image = get_object_or_404(Image, pk=pk)
+    current_user = request.user
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.image = image
+            comment.poster = current_user
+            comment.save()
+            return redirect('home')
+    else:
+        form = CommentForm()
+        return render(request,'comment.html',{"user":current_user,"comment_form":form})    
 
 def like(request,operation,pk):
     image = get_object_or_404(Image,pk=pk)

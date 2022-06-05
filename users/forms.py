@@ -34,3 +34,8 @@ class UploadImageForm(forms.ModelForm):
             'caption',
             
         ]             
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields =['comment']        

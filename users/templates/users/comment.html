@@ -1,0 +1,19 @@
+{%extends 'base.html'%}
+{% block content %}
+<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <title>Comments</title>
+  {{form.media}}
+
+
+
+<div class="card mx-auto" style="max-width:50rem; margin-top:50px;">
+  <form  action="{%url 'comment'%}" method="post" enctype="multipart/form-data">
+    {%csrf_token%}
+
+    {{ form|crispy }}
+    <input type="submit" class="btn btn-success btn-lg" value="Post">
+  </form>
+</div>
+  
+{% endblock %}
+{% endblock %}
