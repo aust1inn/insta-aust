@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from users.models import Image,Profile,Comment,Follow
-from users.forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,UploadImageForm,CommentForm
+from users.forms import CommentForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
