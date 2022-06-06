@@ -16,7 +16,11 @@
             {% for user in username %}
           
             <div class="card border-secondary">
-              <img class="card-img-top" class="img-responsive" src="{{user.profile_photo.url}}" size="100px200">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ user.profile_photo.url }}" height="80px">
+                    <div class="media-body">
+                      <h2 class="account-heading">{{ user.user }}</h2>
+                </div>      
             </div>
             <div class="card-body">
             {% endfor %}
