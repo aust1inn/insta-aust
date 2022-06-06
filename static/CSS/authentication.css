@@ -26,3 +26,7 @@ legend{
     margin-bottom: 20px;
   }
 
+  .user_stories {
+    display: flex;
+    flex-direction: column;
+  }
