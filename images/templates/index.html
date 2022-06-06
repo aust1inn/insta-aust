@@ -12,16 +12,55 @@
               <a href="/profile/{{user.id}}">
                 <label>{{image.profile.user}}</label></a>
             </div>
-            <img src="{{image.insta_image.url}}" height="300px" width="200px" class="card-img-top" data-target="#extraModal{{image.id}}" data-toggle="modal">
-           
+            <img src="{{image.insta_image.url}}" height="300px" width="200px" class="card-img-top" data-bs-target="#extraModal{{image.id}}" data-bs-toggle="modal">
+            <p><strong>{{image.profile.user}} </strong>{{image.caption}}</p>
+
+            {% for comment in comments %}
+            {% if image.id == comment.image.id %}
+            <p><strong>{{comment.poster}}</strong> {{comment.comment}}</p>
+            {% endif %}
+            {% endfor %}
+
                 {{form.media}}
                
+               <a href="{%url 'add_comment' id=image.id %}">comment</a>
               </div>
           
           {% endfor %}
 
         </div>
-       
+
+        <div class="col-2 stories" style="max-width:20rem; margin-top:20px;">
+          <div class="" style="position:fixed; width:350px">
+    
+            <header style="margin-bottom:30px;margin-top:20px;">
+              {% for profile in profile %}
+              {% if profile.user == user %}
+              <img class="mb-1" src="{{profile.profile_photo.url}}" alt="" style="height:50px;width:50px; border-radius:50%; float:left; margin-right:15px">
+              <p style="font-size:16px; align:center;">{{profile.user}}</p>
+              {% endif %}
+              {% endfor %}
+            </header>
+            <hr>
+            <p style="float:left; font-size:15px; font-weight:bolder; color:grey">Stories</p>
+            <p style="float:right; font-weight:bolder; font-size:15px"><a style="color:grey" href="">View All</a></p>
+            <div class="all" style="overflow-y:auto; height:400px;margin-top:50px;padding:10px; border-bottom: 1px solid ; width:100%">
+              <hr>
+              {% for profile in profile %}
+              {% if profile.user != user %}
+              <div class="user_stories" style="margin-bottom:15px">
+                <img src="{{profile.profile_photo.url}}" alt="" style="height:50px;width:50px; border-radius:50%; border-color: red; float:left; margin-right:15px">
+                  <p style="font-size:16px">{{profile.user}}<br>
+    
+                   
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
   

@@ -76,8 +76,8 @@ def upload_image(request):
             }
     return render(request, 'users/upload_image.html', context)    
 
-def add_comment(request,pk):
-    image = get_object_or_404(Image, pk=pk)
+def add_comment(request,id):
+    image = Image.objects.get(pk = id)
     current_user = request.user
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -89,7 +89,7 @@ def add_comment(request,pk):
             return redirect('index')
     else:
         form = CommentForm()
-        return render(request,'comment.html',{"user":current_user,"comment_form":form})    
+        return render(request,'users/comment.html',{"user":current_user,"comment_form":form})    
 
 def like(request,operation,pk):
     image = get_object_or_404(Image,pk=pk)
