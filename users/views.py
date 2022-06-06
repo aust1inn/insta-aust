@@ -110,7 +110,7 @@ def search_users(request):
         searched_name = Profile.find_profile(search_term)
         message = search_term
 
-        return render(request,'search.html',{"message":message,
+        return render(request,'users/search.html',{"message":message,
                                              "profiles":profile,
                                              "user":current_user,
                                              "username":searched_name})
