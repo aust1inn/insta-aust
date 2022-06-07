@@ -1,0 +1,52 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+{% block content %}
+
+  <div class="container">
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ user.profile.profile_photo.url }}" height="80px">
+        <div class="media-body">
+          <h2 class="account-heading">{{ user.username }}</h2>
+          <p class="text-secondary">{{ user.profile.bio }}</p>
+        </div>
+      </div>
+      <!-- FORM HERE -->
+    </div>
+  </div>
+
+  <hr>
+<div class="container" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">
+
+
+
+{% if images %}
+<h1>My posted images</h1>
+<div class="row">
+
+
+{% for image in images %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <img class="card-img-top" src="{{ image.insta_image.url }}" height="250px" />
+            <div class="card-body">
+                </a>
+            </div>
+            <small class="text-small text-center"> {{image.caption}}</small>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+
+{% else %}
+
+<h5> There are still no images for user : {{user.username}}</h5>
+
+{% endif %}
+<hr>
+
+
+
+{% endblock content %}
