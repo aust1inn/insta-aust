@@ -62,7 +62,9 @@ def update_profile(request):
 
     return render(request, 'users/update_profile.html', context)
 
-def user_profile(request):
+def user_profile(request,pk):
+
+    profile = Profile.objects.get(Profile, pk=pk)
 
     current_user = request.user
     images =  Image.objects.filter(profile = current_user.profile)
