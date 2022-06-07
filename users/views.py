@@ -3,7 +3,9 @@ from django.contrib import messages
 from django.core.exceptions import ObjectDoesNotExist
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm,UploadImageForm,CommentForm
 from django.contrib.auth.decorators import login_required
-from .models import Image,Profile
+from .models import Image,Profile,Follow
+from django.contrib.auth.models import User
+
 
 
 def register(request):
@@ -76,8 +78,8 @@ def upload_image(request):
             }
     return render(request, 'users/upload_image.html', context)    
 
-def add_comment(request,id):
-    image = Image.objects.get(pk = id)
+def add_comment(request,pk):
+    image = get_object_or_404(Image, pk=pk)
     current_user = request.user
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -117,3 +119,12 @@ def search_users(request):
     else:
         message = "You haven't searched for any user"
         return render(request,'users/search.html',{"message":message})    
+
+def follow(request,operation,id):
+    current_user=User.objects.get(id=id)
+    if operation=='follow':
+        Follow.follow(request.user,current_user)
+        return redirect('index')
+    elif operation=='unfollow':
+        Follow.unfollow(request.user,current_user)
+        return redirect('index')        

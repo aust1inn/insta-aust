@@ -27,12 +27,14 @@ urlpatterns = [
     path('profile/', user_views.profile, name='profile'),
     path('update_profile/', user_views.update_profile, name='update_profile'),
     path('upload_image/', user_views.upload_image, name='upload_image'),
-    path('add_comment/<int:id>/', user_views.add_comment, name='add_comment'),
-    path('like/', user_views.like, name='like'),
+    url(r'^like/(?P<operation>.+)/(?P<pk>\d+)',user_views.like, name='like'),
+    url(r'^comment/(?P<pk>\d+)',user_views.add_comment,name='comment'),
 
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('search/', user_views.search_users, name='search'),
+    url(r'^follow/(?P<operation>.+)/(?P<id>\d+)',user_views.follow,name='follow'),
+
 
 ]
