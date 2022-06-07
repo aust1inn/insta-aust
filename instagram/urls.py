@@ -26,7 +26,6 @@ urlpatterns = [
     url(r'',include('images.urls')),
     path('profile/', user_views.profile, name='profile'),
     path('update_profile/', user_views.update_profile, name='update_profile'),
-    path('user_profile/<int:pk>', user_views.user_profile, name='user_profile'),
     path('upload_image/', user_views.upload_image, name='upload_image'),
     url(r'^like/(?P<operation>.+)/(?P<pk>\d+)',user_views.like, name='like'),
     re_path(r'^comment/(?P<pk>\d+)', user_views.add_comment, name='comment'),

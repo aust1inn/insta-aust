@@ -62,25 +62,7 @@ def update_profile(request):
 
     return render(request, 'users/update_profile.html', context)
 
-def user_profile(request,pk):
 
-    profile = Profile.objects.get(Profile, pk=pk)
-
-    current_user = request.user
-    images =  Image.objects.filter(profile = current_user.profile)
-    try:
-        profile = Profile.objects.get(user = current_user)
-        
-    except: 
-        ObjectDoesNotExist
-    
-    context = {
-        
-        'profile':profile,
-        'images':images,
-        'current_user':current_user
-    }
-    return render(request, 'users/user_profile.html',context)        
 
 @login_required
 def upload_image(request):
