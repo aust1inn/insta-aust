@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path
 from users import views as user_views
 from django.contrib.auth import views as auth_views
 
@@ -28,7 +28,7 @@ urlpatterns = [
     path('update_profile/', user_views.update_profile, name='update_profile'),
     path('upload_image/', user_views.upload_image, name='upload_image'),
     url(r'^like/(?P<operation>.+)/(?P<pk>\d+)',user_views.like, name='like'),
-    url(r'^comment/(?P<pk>\d+)',user_views.add_comment,name='comment'),
+    re_path(r'^comment/(?P<pk>\d+)', user_views.add_comment, name='comment'),
 
     path('register/', user_views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),

@@ -24,6 +24,8 @@
                 {{form.media}}
                
                <a href="{%url 'comment' pk=image.id %}">comment</a>
+               <a id="like" href="{% url 'like' operation='like' pk=image.id%}"><i class="far fa-heart" style="margin-right:10px;color:black;"></i></a>
+
               </div>
           
           {% endfor %}
