@@ -22,6 +22,7 @@ def register(request):
 
 @login_required
 def profile(request):
+
     current_user = request.user
     images =  Image.objects.filter(profile = current_user.profile)
     try:

@@ -26,6 +26,10 @@
                <a href="{%url 'comment' pk=image.id %}">comment</a>
                <a id="like" href="{% url 'like' operation='like' pk=image.id%}"><i class="far fa-heart" style="margin-right:10px;color:black;"></i></a>
 
+               {% if image.likes >= 1 %}
+                  <label>{{image.likes}} Likes</label>
+                {% endif %}
+
               </div>
           
           {% endfor %}
@@ -50,11 +54,12 @@
               <hr>
               {% for profile in profile %}
               {% if profile.user != user %}
-              <div class="user_stories" style="margin-bottom:40px">
+              <div class="user_stories" style="margin-bottom:20px">
                 <img src="{{profile.profile_photo.url}}" alt="" style="height:50px;width:50px; border-radius:50%; border-color: red; float:left; margin-right:15px">
                   <p style="font-size:16px">{{profile.user}}<br>
     
-                   
+                    <a href="/follow/follow/{{profile.user.id}}/" class="btn btn-outline-secondary btn-sm">{{follow}}follow</a>
+                    <a href="/follow/unfollow/{{profile.user.id}}/" class="btn btn-outline-secondary btn-sm">{{unfollow}}unfollow</a> 
               </div>
               {% endif %}
               {% endfor %}
@@ -65,6 +70,32 @@
 
       </div>
     </div>
+
+
+    {% for image in images %}
+<!-- Modal -->
+<div class="modal fade" id="extraModal{{image.id}}" tabindex="-1" role="dialog" aria-labelledby="extraModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Poster: {{image.posted_by}}</h5>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </div>
+
+      <div class="modal-body">
+        <img class="card-img-top" class="img-responsive" src="{{image.insta_image.url}}" data-target="#extraModal{{image.id}}" data-toggle="modal" size="100px200">
+        <p>About: {{image.caption}}</p>
+        <label>{{image.likes}} Likes</label>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endfor %}
   
 
 {% endblock %}
