@@ -51,8 +51,8 @@ Admin should:
 ### Cloning
 * In your terminal:
 
-        $ git clone https://github.com/emdeechege/Instrapicha
-        $ cd Instrapicha
+        $ git clone https://github.com/aust1inn/insta-aust
+        $ cd insta-aust
 
 ## Running the Application
 * Creating the virtual environment
@@ -80,7 +80,8 @@ Admin should:
 
 ## Known Bugs
 * Multiple likes can be done on single image
-* Comment section
+* Comment section throws an error
+* Follow section not properly working
 
 ## License
 
